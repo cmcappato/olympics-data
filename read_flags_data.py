@@ -1,41 +1,30 @@
 import pandas as pd
 
-raw_country_flags = pd.read_csv("flags.csv", sep=";")
+raw_country_flags = pd.read_csv("flags.csv", sep=";",
+                                   usecols=["name", 
+                                   "image", 
+                                   "landmass",
+                                   "language",
+                                   "religion"])
 flags = raw_country_flags.copy()
 
-flags.info()
+flags = flags.astype({
+       "name": "string",
+       "image": "string",
+       "landmass": int,
+       "language": int,
+       "religion": int,
+})
 
-# List columns
-flags.columns
-
-# delete columns I don't need
-flags = flags.drop(labels=["area","zone","bars", "stripes", "colours", "red ", "green", "blue",
-       "gold", "white", "black", "orange ", "mainhue", "circles", "crosses",
-       "saltires", "quarters", "sunstars", "crescent", "triangle", "icon",
-       "animate", "text", "topleft", "botright"], axis=1)
-
-flags.info() # check they were correctly deleted
-
-flags["name"] = flags["name"].astype('string')
-flags["image"] = flags["image"].astype('string')
-flags["landmass"] = flags["landmass"].astype(int)
-flags["area"] = flags["area"].astype(int)
-flags["population"] = flags["population"].astype(int)
-flags["language"] = flags["language"].astype(int)
-flags["religion"] = flags["religion"].astype(int)
 
 # Rename columns for better readance and consistency
 flags = flags.rename(columns={
                             "name":"CountryName",
                             "image":"ImageURL",
                             "landmass":"Continent",
-                            "population":"Population",
                             "language":"CountryLanguage",
                             "religion":"CountryReligion"},
                      errors="raise")
-
-#check again
-flags.info()
 
 # Named continents
 flags.Continent[flags["Continent"] == 1] = "Americas"
