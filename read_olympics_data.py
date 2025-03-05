@@ -20,10 +20,15 @@ oly = oly.astype({
         "City": "string",
         "Sport": "string",
         "Event": "string",
-        "Medal": int
+        "Medal": "string"
 })
 
 oly.shape # Check size
+
+# Change medal type for clarity
+oly.Medal[oly["Medal"] == '1'] = 'Gold'
+oly.Medal[oly["Medal"] == '2'] = 'Silver'
+oly.Medal[oly["Medal"] == '3'] = 'Bronze'
 
 # Rename columns
 oly = oly.rename(columns={
