@@ -26,6 +26,7 @@ oly = oly.astype({
 oly.shape # Check size
 
 # Change medal type for clarity
+oly.Medal[oly["Medal"] == '0'] = 'No medal'
 oly.Medal[oly["Medal"] == '1'] = 'Gold'
 oly.Medal[oly["Medal"] == '2'] = 'Silver'
 oly.Medal[oly["Medal"] == '3'] = 'Bronze'
