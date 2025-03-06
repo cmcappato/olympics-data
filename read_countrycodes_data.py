@@ -8,11 +8,12 @@ codes = codes.astype({
         "region": "string"
 })
 
-codes = codes.drop(columns=["notes"])
+codes["regions"] = codes.apply(lambda row: f"{row['region']} ({row['notes']})" if pd.notna(row['notes']) and row['notes'] != '' else row['region'], axis=1)
+codes = codes.drop(columns=["region","notes"])
 
 codes = codes.rename(columns={
                         "NOC":"IOC",
-                        "region":"Country"},
+                        "regions":"Country"},
                 errors="raise")
 
 # Save to use later
