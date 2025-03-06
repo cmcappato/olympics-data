@@ -10,7 +10,6 @@ oly = oly.astype({
         "Sex": "string",
         "Age": int,
         "Height": int,
-        "Name": "string",
         "Weight": float,
         "Team": "string",
         "NOC": "string",
